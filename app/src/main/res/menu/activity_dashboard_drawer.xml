@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_dashboard"
+            android:icon="@drawable/dashboard"
+            android:title="Dashboard" />
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/profile"
+            android:title="Profile" />
+        <item
+            android:id="@+id/nav_DRSList"
+            android:icon="@drawable/drslist"
+            android:title="DRS List" />
+        <item
+            android:id="@+id/nav_DRSHistory"
+            android:icon="@drawable/drshistory"
+            android:title="DRS History" />
+
+        <item
+            android:id="@+id/nav_scanPickup"
+            android:icon="@drawable/scan1"
+            android:title="Scan Pickup" />
+        <item
+            android:id="@+id/nav_scanDrs"
+            android:icon="@drawable/scan"
+            android:title="Scan DRS" />
+        <item
+            android:id="@+id/nav_pickupList"
+            android:icon="@drawable/pickuplist"
+            android:title="Pickup List" />
+        <item
+            android:id="@+id/nav_pickuphistory"
+            android:icon="@drawable/pickuphistory"
+            android:title="Pickup History" />
+
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/lock"
+            android:title="Log out" />
+    </group>
+
+
+</menu>
