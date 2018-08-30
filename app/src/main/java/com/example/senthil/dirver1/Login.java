@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.senthil.dirver1.Activty.Register;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.internal.Utils;
@@ -21,7 +23,7 @@ public class Login extends AppCompatActivity {
      @BindView(R.id.password) EditText PassWord;
      @BindView(R.id.email_sign_in_button) Button login;
      @BindView(R.id.forgotPassword) TextView forgotPassword;
-     @BindView(R.id.Register) TextView Register;
+     @BindView(R.id.Register) TextView Register1;
 
 
     @Override
@@ -30,12 +32,13 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         ButterKnife.bind(this);
     }
 
     public void getRegister(View view) {
-        Log.e("GetRegister","Click Action");
+      Intent i=new Intent(Login.this,Register.class);
+      startActivity(i);
+      finish();
     }
 
     public void getpassWord(View view) {
@@ -46,7 +49,6 @@ public class Login extends AppCompatActivity {
 
         String userName=UserName.getText().toString();
         String password=PassWord.getText().toString();
-
          validate(userName,password);
 
     }

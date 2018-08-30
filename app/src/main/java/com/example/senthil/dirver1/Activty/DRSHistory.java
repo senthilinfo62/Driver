@@ -1,4 +1,4 @@
-package com.example.senthil.dirver1;
+package com.example.senthil.dirver1.Activty;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,13 +13,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
-public class PickupHistory extends AppCompatActivity
+import com.example.senthil.dirver1.Profile;
+import com.example.senthil.dirver1.R;
+
+public class DRSHistory extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pickup_history);
+        setContentView(R.layout.activity_drshistory);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -45,28 +48,8 @@ public class PickupHistory extends AppCompatActivity
         }
     }
 
-   /* @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.dashboard, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-*/
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -74,35 +57,35 @@ public class PickupHistory extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_dashboard) {
-            Intent dash=new Intent(PickupHistory.this,Dashboard.class);
+            Intent dash=new Intent(DRSHistory.this,Dashboard.class);
             startActivity(dash);
             finish();
 
         } else if (id == R.id.nav_profile) {
-            Intent profile=new Intent(PickupHistory.this,Profile.class);
+            Intent profile=new Intent(DRSHistory.this,Profile.class);
             startActivity(profile);
 
         } else if (id == R.id.nav_DRSList) {
-            Intent drsList=new Intent(PickupHistory.this,DRSList.class);
+            Intent drsList=new Intent(DRSHistory.this,DRSList.class);
             startActivity(drsList);
 
         } else if (id == R.id.nav_DRSHistory) {
-            Intent drsHistory=new Intent(PickupHistory.this,DRSHistory.class);
+            Intent drsHistory=new Intent(DRSHistory.this,DRSHistory.class);
             startActivity(drsHistory);
 
         } else if (id == R.id.nav_scanPickup) {
-            Intent scanPickup=new Intent(PickupHistory.this,Scanpickup.class);
+            Intent scanPickup=new Intent(DRSHistory.this,Scanpickup.class);
             startActivity(scanPickup);
 
         } else if (id == R.id.nav_scanDrs) {
-            Intent scanDrs=new Intent(PickupHistory.this,ScanDRS.class);
+            Intent scanDrs=new Intent(DRSHistory.this,ScanDRS.class);
             startActivity(scanDrs);
 
         }else if (id == R.id.nav_pickupList) {
-            Intent pickUpList=new Intent(PickupHistory.this,PickupList.class);
+            Intent pickUpList=new Intent(DRSHistory.this,PickupList.class);
             startActivity(pickUpList);
         }else if (id == R.id.nav_pickuphistory) {
-            Intent pickHistory=new Intent(PickupHistory.this,PickupHistory.class);
+            Intent pickHistory=new Intent(DRSHistory.this,PickupHistory.class);
             startActivity(pickHistory);
         }else if (id == R.id.nav_logout) {
 

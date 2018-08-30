@@ -30,4 +30,35 @@
     <string name="dash_title_logout">Logout</string>
     <string name="dash_title_editProfile">Edit Profile</string>
     <string name="title_activity_edit_profile">Edit Profile</string>
+    <string name="title_activity_register">Register</string>
+
+
+    <!--Register Hint-->
+
+    <string name="reg_firstName">Enter First Name</string>
+    <string name="reg_lastName">Enter Last Name</string>
+    <string name="reg_gender">Enter Gender </string>
+    <string name="reg_dob">Enter Date of Birth</string>
+    <string name="reg_Email">Enter Email Id</string>
+    <string name="reg_countryCode">Enter country Code</string>
+    <string name="reg_PhoneNo">Enter Phone No</string>
+    <string name="reg_Language">Enter Language</string>
+
+
+    <!-- String Array -->
+    <string-array name="Gender">
+        <item>Select Gender</item>
+    <item>Male</item>
+    <item>Female</item>
+
+    </string-array>
+
+    <string-array name="Language">
+        <item>Select Language</item>
+        <item>En</item>
+        <item>Ar</item>
+
+
+    </string-array>
+
 </resources>

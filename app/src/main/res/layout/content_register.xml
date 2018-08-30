@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Activty.Register"
+    tools:showIn="@layout/app_bar_register">
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        tools:context="com.journaldev.featuresoftextinputlayout.MainActivity">
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/firstName"
+        android:layout_weight="1"
+        android:hint="@string/reg_firstName"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lastName"
+        android:layout_weight="1"
+        android:hint="@string/reg_lastName"/>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/gender"
+        android:layout_weight="1"
+        android:hint="@string/reg_gender"/>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+       >
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dob"
+        android:layout_weight="1"
+        android:hint="@string/reg_dob"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/imgdob"
+            android:onClick="getDob"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_weight="1"/>
+    </LinearLayout>
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/email"
+        android:layout_weight="1"
+        android:hint="@string/reg_Email"/>
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/contrycode"
+        android:layout_weight="1"
+        android:hint="@string/reg_countryCode"/>
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/phone"
+        android:layout_weight="1"
+        android:hint="@string/reg_PhoneNo"/>
+    <Spinner
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/language"
+        android:layout_weight="1"
+        android:hint="@string/reg_Language"/>
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/title_activity_register"
+        android:onClick="getRegisteration"
+        android:padding="8dp"/>
+</LinearLayout>
+
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>

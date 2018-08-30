@@ -1,4 +1,4 @@
-package com.example.senthil.dirver1;
+package com.example.senthil.dirver1.Activty;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,33 +9,17 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.example.senthil.dirver1.Activty.DRSHistory;
-import com.example.senthil.dirver1.Activty.DRSList;
-import com.example.senthil.dirver1.Activty.Dashboard;
-import com.example.senthil.dirver1.Activty.PickupHistory;
-import com.example.senthil.dirver1.Activty.PickupList;
-import com.example.senthil.dirver1.Activty.ScanDRS;
-import com.example.senthil.dirver1.Activty.Scanpickup;
+import com.example.senthil.dirver1.Profile;
+import com.example.senthil.dirver1.R;
 
-import butterknife.BindView;
-
-public class Profile extends AppCompatActivity
+public class PickupList extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    @BindView(R.id.userProfile) ImageView imageView;
-    @BindView(R.id.userProfileName)TextView profileName;
-    @BindView(R.id.userProfileEmail)TextView profileEmail;
-    @BindView(R.id.CourierId)TextView courierId;
-    @BindView(R.id.VericleNo)TextView vericleNo;
-    @BindView(R.id.MobileNo)TextView mobileNo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_pickup_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -51,7 +35,7 @@ public class Profile extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    @Override
+   /* @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -61,44 +45,63 @@ public class Profile extends AppCompatActivity
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.dashboard, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }*/
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
         if (id == R.id.nav_dashboard) {
-            Intent dash=new Intent(Profile.this,Dashboard.class);
+            Intent dash=new Intent(PickupList.this,Dashboard.class);
             startActivity(dash);
             finish();
 
         } else if (id == R.id.nav_profile) {
-            Intent profile=new Intent(Profile.this,Profile.class);
+            Intent profile=new Intent(PickupList.this,Profile.class);
             startActivity(profile);
 
         } else if (id == R.id.nav_DRSList) {
-            Intent drsList=new Intent(Profile.this,DRSList.class);
+            Intent drsList=new Intent(PickupList.this,DRSList.class);
             startActivity(drsList);
 
         } else if (id == R.id.nav_DRSHistory) {
-            Intent drsHistory=new Intent(Profile.this,DRSHistory.class);
+            Intent drsHistory=new Intent(PickupList.this,DRSHistory.class);
             startActivity(drsHistory);
 
         } else if (id == R.id.nav_scanPickup) {
-            Intent scanPickup=new Intent(Profile.this,Scanpickup.class);
+            Intent scanPickup=new Intent(PickupList.this,Scanpickup.class);
             startActivity(scanPickup);
 
         } else if (id == R.id.nav_scanDrs) {
-            Intent scanDrs=new Intent(Profile.this,ScanDRS.class);
+            Intent scanDrs=new Intent(PickupList.this,ScanDRS.class);
             startActivity(scanDrs);
 
         }else if (id == R.id.nav_pickupList) {
-            Intent pickUpList=new Intent(Profile.this,PickupList.class);
+            Intent pickUpList=new Intent(PickupList.this,PickupList.class);
             startActivity(pickUpList);
         }else if (id == R.id.nav_pickuphistory) {
-            Intent pickHistory=new Intent(Profile.this,PickupHistory.class);
+            Intent pickHistory=new Intent(PickupList.this,PickupHistory.class);
             startActivity(pickHistory);
         }else if (id == R.id.nav_logout) {
 
@@ -107,11 +110,5 @@ public class Profile extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    public void getUpdateUser(View view) {
-        Intent pickHistory=new Intent(Profile.this,EditProfile.class);
-        startActivity(pickHistory);
-
     }
 }

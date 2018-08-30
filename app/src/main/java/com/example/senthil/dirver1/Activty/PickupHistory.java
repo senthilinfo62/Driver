@@ -1,25 +1,25 @@
-package com.example.senthil.dirver1;
+package com.example.senthil.dirver1.Activty;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 
-public class ScanDRS extends AppCompatActivity
+import com.example.senthil.dirver1.Profile;
+import com.example.senthil.dirver1.R;
+
+public class PickupHistory extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sacn_drs);
+        setContentView(R.layout.activity_pickup_history);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -65,8 +65,8 @@ public class ScanDRS extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
-    }*/
-
+    }
+*/
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -74,39 +74,40 @@ public class ScanDRS extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_dashboard) {
-            Intent dash=new Intent(ScanDRS.this,Dashboard.class);
+            Intent dash=new Intent(PickupHistory.this,Dashboard.class);
             startActivity(dash);
             finish();
 
         } else if (id == R.id.nav_profile) {
-            Intent profile=new Intent(ScanDRS.this,Profile.class);
+            Intent profile=new Intent(PickupHistory.this,Profile.class);
             startActivity(profile);
 
         } else if (id == R.id.nav_DRSList) {
-            Intent drsList=new Intent(ScanDRS.this,DRSList.class);
+            Intent drsList=new Intent(PickupHistory.this,DRSList.class);
             startActivity(drsList);
 
         } else if (id == R.id.nav_DRSHistory) {
-            Intent drsHistory=new Intent(ScanDRS.this,DRSHistory.class);
+            Intent drsHistory=new Intent(PickupHistory.this,DRSHistory.class);
             startActivity(drsHistory);
 
         } else if (id == R.id.nav_scanPickup) {
-            Intent scanPickup=new Intent(ScanDRS.this,Scanpickup.class);
+            Intent scanPickup=new Intent(PickupHistory.this,Scanpickup.class);
             startActivity(scanPickup);
 
         } else if (id == R.id.nav_scanDrs) {
-            Intent scanDrs=new Intent(ScanDRS.this,ScanDRS.class);
+            Intent scanDrs=new Intent(PickupHistory.this,ScanDRS.class);
             startActivity(scanDrs);
 
         }else if (id == R.id.nav_pickupList) {
-            Intent pickUpList=new Intent(ScanDRS.this,PickupList.class);
+            Intent pickUpList=new Intent(PickupHistory.this,PickupList.class);
             startActivity(pickUpList);
         }else if (id == R.id.nav_pickuphistory) {
-            Intent pickHistory=new Intent(ScanDRS.this,PickupHistory.class);
+            Intent pickHistory=new Intent(PickupHistory.this,PickupHistory.class);
             startActivity(pickHistory);
         }else if (id == R.id.nav_logout) {
 
         }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

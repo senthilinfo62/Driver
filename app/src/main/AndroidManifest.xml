@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Dashboard"
+            android:name=".Activty.Dashboard"
             android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme" />
         <activity
@@ -28,32 +28,36 @@
             android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".DRSList"
+            android:name=".Activty.DRSList"
             android:label="@string/title_activity_drslist"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Scanpickup"
+            android:name=".Activty.Scanpickup"
             android:label="@string/title_activity_scanpickup"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".DRSHistory"
+            android:name=".Activty.DRSHistory"
             android:label="@string/title_activity_drshistory"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".ScanDRS"
+            android:name=".Activty.ScanDRS"
             android:label="@string/title_activity_sacn_drs"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".PickupList"
+            android:name=".Activty.PickupList"
             android:label="@string/title_activity_pickup_list"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".PickupHistory"
+            android:name=".Activty.PickupHistory"
             android:label="@string/title_activity_pickup_history"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".EditProfile"
             android:label="@string/title_activity_edit_profile"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Activty.Register"
+            android:label="@string/title_activity_register"
             android:theme="@style/AppTheme"></activity>
     </application>
 
