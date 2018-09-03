@@ -17,26 +17,29 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="@dimen/fab_margin">
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/firstName"
         android:layout_weight="1"
-        android:hint="@string/reg_firstName"/>
+        android:hint="@string/reg_firstName"
+        android:textSize="16sp"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/lastName"
         android:layout_weight="1"
+        android:textSize="16sp"
         android:hint="@string/reg_lastName"/>
 
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/gender"
+        android:textSize="16sp"
         android:layout_weight="1"
         android:hint="@string/reg_gender"/>
     <LinearLayout
@@ -48,6 +51,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/dob"
+        android:textSize="16sp"
         android:layout_weight="1"
         android:hint="@string/reg_dob"/>
 
@@ -56,6 +60,7 @@
             android:layout_height="50dp"
             android:id="@+id/imgdob"
             android:onClick="getDob"
+
             android:src="@drawable/ic_launcher_background"
             android:layout_weight="1"/>
     </LinearLayout>
@@ -64,11 +69,13 @@
         android:layout_height="wrap_content"
         android:id="@+id/email"
         android:layout_weight="1"
+        android:textSize="16sp"
         android:hint="@string/reg_Email"/>
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/contrycode"
+        android:textSize="16sp"
         android:layout_weight="1"
         android:hint="@string/reg_countryCode"/>
     <EditText
@@ -76,6 +83,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/phone"
         android:layout_weight="1"
+        android:textSize="16sp"
         android:hint="@string/reg_PhoneNo"/>
     <Spinner
         android:layout_width="fill_parent"
@@ -87,6 +95,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/title_activity_register"
+        android:textSize="16sp"
         android:onClick="getRegisteration"
         android:padding="8dp"/>
 </LinearLayout>

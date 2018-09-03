@@ -1,14 +1,46 @@
 package com.example.senthil.dirver1.Pojo;
 
+import com.google.gson.annotations.SerializedName;
+
 public class RegisterPoJo {
+    @SerializedName("first_name")
     String firstName;
+    @SerializedName("last_name")
     String lastName;
+    @SerializedName("gender")
     String gender;
+    @SerializedName("dob")
     String dob;
+    @SerializedName("email")
     String emailId;
+    @SerializedName("country_code")
     String countryCode;
+    @SerializedName("phone_no")
     String phoneNo;
+    @SerializedName("language")
     String lanuage;
+    @SerializedName("device_type")
+    String diviceType;
+    @SerializedName("user_name")
+    String Username;
+    @SerializedName("password")
+    String password;
+
+    public String getUsername() {
+        return Username;
+    }
+
+    public void setUsername(String username) {
+        Username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -72,5 +104,13 @@ public class RegisterPoJo {
 
     public void setLanuage(String lanuage) {
         this.lanuage = lanuage;
+    }
+
+    public String getDiviceType() {
+        return diviceType;
+    }
+
+    public void setDiviceType(String diviceType) {
+        this.diviceType = diviceType;
     }
 }

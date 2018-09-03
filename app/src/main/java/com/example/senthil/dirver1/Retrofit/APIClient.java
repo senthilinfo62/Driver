@@ -10,7 +10,7 @@ import static com.example.senthil.dirver1.Utilits.AppConstants.Base_URL;
 public class APIClient {
     private static Retrofit retrofit = null;
 
-    static Retrofit getClient() {
+    public static Retrofit getClient() {
 
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);

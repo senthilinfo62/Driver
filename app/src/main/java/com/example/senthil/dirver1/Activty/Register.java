@@ -1,10 +1,15 @@
 package com.example.senthil.dirver1.Activty;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,28 +19,52 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.example.senthil.dirver1.Pojo.RegisterPoJo;
 import com.example.senthil.dirver1.Profile;
 import com.example.senthil.dirver1.R;
+import com.example.senthil.dirver1.Retrofit.APIClient;
+import com.example.senthil.dirver1.Retrofit.APIInterface;
+import com.example.senthil.dirver1.Utilits.NetworkState;
+import com.google.gson.Gson;
 
+import java.util.Calendar;
+
+import am.appwise.components.ni.NoInternetDialog;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Register extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     @BindView(R.id.firstName)EditText firstName;
     @BindView(R.id.lastName)EditText lastName;
     @BindView(R.id.gender)Spinner gender;
-    @BindView(R.id.dob)EditText bob;
+    @BindView(R.id.dob)EditText dob;
     @BindView(R.id.imgdob)ImageButton imageButton;
     @BindView(R.id.email)EditText emailId;
     @BindView(R.id.contrycode)EditText countryCode;
     @BindView(R.id.phone)EditText phone;
     @BindView(R.id.language)Spinner language;
+    APIInterface apiInterface;
+    DatePickerDialog datePickerDialog;
+    int year;
+    int month;
+    int dayOfMonth;
+    Calendar calendar;
+    private ProgressDialog pDialog;
+    NetworkState myNet;
+    NoInternetDialog noInternetDialog;
+    RegisterPoJo registerPoJo=new RegisterPoJo();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +73,8 @@ public class Register extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ButterKnife.bind(this);
-
+        noInternetDialog = new NoInternetDialog.Builder(Register.this).build();
+        myNet=new NetworkState(Register.this);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -62,6 +92,29 @@ public class Register extends AppCompatActivity
         ArrayAdapter aaa = new ArrayAdapter(Register.this,android.R.layout.simple_spinner_item,Language);
         aaa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         language.setAdapter(aaa);
+
+        gender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+               registerPoJo.setGender( parent.getItemAtPosition(position).toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        language.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                registerPoJo.setLanuage(parent.getItemAtPosition(position).toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     @Override
@@ -141,8 +194,100 @@ public class Register extends AppCompatActivity
 
     public void getRegisteration(View view) {
 
+
+
+
+
+
+
+        inputValidation();
+
+    }
+
+    private void inputValidation() {
+
+
+            registerPoJo.setFirstName(firstName.getText().toString());
+
+
+            registerPoJo.setLastName(lastName.getText().toString());
+
+
+            registerPoJo.setDob(dob.getText().toString());
+
+
+            registerPoJo.setEmailId(emailId.getText().toString());
+
+
+            registerPoJo.setCountryCode(countryCode.getText().toString());
+
+
+            registerPoJo.setPhoneNo(phone.getText().toString());
+
+            registerPoJo.setUsername("admin");
+            registerPoJo.setPassword("admin@2227328297");
+
+        registerPoJo.setDiviceType("2");
+        try {
+            Gson gson = new Gson();
+            String json = gson.toJson(registerPoJo);
+            System.out.println(json);
+            if (myNet.isInternetOn()) {
+                ServerCall(json);
+            } else {
+                noInternetDialog.showDialog();
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+
+    }
+
+    private void ServerCall(String json) {
+
+        apiInterface = APIClient.getClient().create(APIInterface.class);
+        Call<Object> call2 = apiInterface.RegisterPost( json.toString());
+        final ProgressDialog progressDoalog;
+        progressDoalog = new ProgressDialog(Register.this);
+        progressDoalog.setMax(100);
+        progressDoalog.setMessage("Loading....");
+        progressDoalog.setTitle("Please Wait...");
+        progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDoalog.show();
+        call2.enqueue(new Callback< Object>() {
+
+
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            public void onResponse(Call<Object> call, Response<Object> response) {
+                response.body();
+                progressDoalog.dismiss();
+                Log.e(" server",response.body().toString());
+            }
+
+            @Override
+            public void onFailure(Call< Object> call, Throwable t) {
+                Log.e("Error at server",t.toString());
+
+            }
+        });
+
     }
 
     public void getDob(View view) {
+        calendar = Calendar.getInstance();
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH);
+        dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+        datePickerDialog = new DatePickerDialog(Register.this,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                        dob.setText(day + "-" + (month + 1) + "-" + year);
+                    }
+                }, year, month, dayOfMonth);
+
+        datePickerDialog.show();
     }
+
+
 }
