@@ -35,30 +35,31 @@
 
     <!--Register Hint-->
 
-    <string name="reg_firstName">Enter First Name</string>
-    <string name="reg_lastName">Enter Last Name</string>
-    <string name="reg_gender">Enter Gender </string>
-    <string name="reg_dob">Enter Date of Birth</string>
-    <string name="reg_Email">Enter Email Id</string>
-    <string name="reg_countryCode">Enter country Code</string>
-    <string name="reg_PhoneNo">Enter Phone No</string>
-    <string name="reg_Language">Enter Language</string>
+    <string name="reg_Name">Enter  Name</string>
+    <string name="reg_country">Enter Country</string>
+    <string name="reg_state">Enter State </string>
+    <string name="reg_code">Enter code</string>
+    <string name="reg_mobile">Enter Mobile</string>
+    <string name="reg_email">Enter Email ID</string>
+    <string name="reg_iqama_id">Enter iqama Id</string>
+    <string name="reg_licence">Enter Upload license</string>
+    <string name="reg_iqmqimg">Enter Upload Iqama/ID</string>
+    <string name="reg_vehicle_type">Enter Vehicle Type</string>
+    <string name="reg_supplier">Enter Supplier</string>
+    <string name="reg_joinDate">Enter Join Date</string>
+    <string name="reg_password">Enter Password</string>
+    <string name="reg_vehicle_number">Enter Vehicle Number</string>
+    <string name="reg_profile">Enter Profile Image</string>
+    <string name="reg_btn">Register </string>
 
 
-    <!-- String Array -->
-    <string-array name="Gender">
-        <item>Select Gender</item>
-    <item>Male</item>
-    <item>Female</item>
-
-    </string-array>
-
-    <string-array name="Language">
-        <item>Select Language</item>
-        <item>En</item>
-        <item>Ar</item>
 
 
-    </string-array>
+
+    <string name="title_activity_forgot_password">ForgotPassword</string>
+    <string name="forgotEmail">Email Id</string>
+    <string name="newpassword">New Password</string>
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="forgotbtn">Change Password</string>
 
 </resources>

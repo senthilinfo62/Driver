@@ -18,86 +18,174 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:padding="@dimen/fab_margin">
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/firstName"
-        android:layout_weight="1"
-        android:hint="@string/reg_firstName"
-        android:textSize="16sp"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/lastName"
-        android:layout_weight="1"
-        android:textSize="16sp"
-        android:hint="@string/reg_lastName"/>
-
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/gender"
-        android:textSize="16sp"
-        android:layout_weight="1"
-        android:hint="@string/reg_gender"/>
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-       >
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/dob"
-        android:textSize="16sp"
-        android:layout_weight="1"
-        android:hint="@string/reg_dob"/>
+        android:id="@+id/name"
+        android:background="@drawable/edittextoutline"
+        android:hint="@string/reg_Name"
+        android:padding="5dp"/>
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:id="@+id/imgdob"
-            android:onClick="getDob"
-
-            android:src="@drawable/ic_launcher_background"
-            android:layout_weight="1"/>
-    </LinearLayout>
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/country"
+        android:padding="5dp"
+        android:background="@drawable/edittextoutline"
+        android:hint="@string/reg_country"/>
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/state"
+        android:padding="5dp"
+        android:background="@drawable/edittextoutline"
+        android:hint="@string/reg_state"/>
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/code"
+        android:padding="5dp"
+        android:background="@drawable/edittextoutline"
+        android:hint="@string/reg_code"/>
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/mobileNo"
+        android:padding="5dp"
+        android:background="@drawable/edittextoutline"
+        android:hint="@string/mobile"/>
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/email"
-        android:layout_weight="1"
-        android:textSize="16sp"
-        android:hint="@string/reg_Email"/>
+        android:padding="5dp"
+        android:background="@drawable/edittextoutline"
+        android:hint="@string/reg_email"/>
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/contrycode"
-        android:textSize="16sp"
-        android:layout_weight="1"
-        android:hint="@string/reg_countryCode"/>
+        android:id="@+id/iqamaId"
+        android:padding="5dp"
+        android:background="@drawable/edittextoutline"
+        android:hint="@string/reg_iqama_id"/>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        >
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:id="@+id/uploadIqamaId"
+            android:hint="@string/reg_iqmqimg"
+            android:layout_weight="1"/>
+        <ImageButton
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/attachment"
+            android:background="@color/white"
+            android:onClick="getIQMAImage"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        >
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:id="@+id/lincence"
+            android:hint="@string/reg_licence"
+            android:layout_weight="1"/>
+        <ImageButton
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/attachment"
+            android:background="@color/white"
+            android:onClick="getLincenceImage"/>
+    </LinearLayout>
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/phone"
-        android:layout_weight="1"
-        android:textSize="16sp"
-        android:hint="@string/reg_PhoneNo"/>
-    <Spinner
+        android:background="@drawable/edittextoutline"
+        android:id="@+id/vehicle_type"
+        android:padding="5dp"
+        android:hint="@string/reg_vehicle_type"/>
+    <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/language"
+        android:background="@drawable/edittextoutline"
+        android:id="@+id/supplier"
+        android:padding="5dp"
+        android:hint="@string/reg_supplier"/>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        >
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:id="@+id/date"
+            android:hint="@string/reg_licence"
+            android:layout_weight="1"/>
+        <ImageButton
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:src="@drawable/calendar"
+            android:background="@color/white"
+            android:onClick="getDateofjoin"/>
+    </LinearLayout>
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/reg_password"
+        android:id="@+id/reg_password"
+        android:background="@drawable/edittextoutline"
+        android:padding="5dp"/>
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/vehicle_number"
+        android:background="@drawable/edittextoutline"
+        android:padding="5dp"
+        android:hint="@string/reg_vehicle_type"
+        />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        >
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:id="@+id/profile"
+        android:hint="@string/reg_profile"
+        android:layout_weight="1"/>
+    <ImageButton
+        android:layout_width="70dp"
+        android:layout_height="30dp"
         android:layout_weight="1"
-        android:hint="@string/reg_Language"/>
+        android:src="@drawable/attachment"
+        android:background="@color/white"
+        android:onClick="getProfileImg"/>
+</LinearLayout>
+
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/title_activity_register"
-        android:textSize="16sp"
-        android:onClick="getRegisteration"
-        android:padding="8dp"/>
+        android:text="@string/reg_btn"
+        android:onClick="getRegisteration"/>
 </LinearLayout>
 
     </ScrollView>

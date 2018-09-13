@@ -3,114 +3,158 @@ package com.example.senthil.dirver1.Pojo;
 import com.google.gson.annotations.SerializedName;
 
 public class RegisterPoJo {
-    @SerializedName("first_name")
-    String firstName;
-    @SerializedName("last_name")
-    String lastName;
-    @SerializedName("gender")
-    String gender;
-    @SerializedName("dob")
-    String dob;
+    @SerializedName("name")
+    String regName;
+    @SerializedName("country")
+    String regCountry;
+    @SerializedName("state")
+    String regState;
+    @SerializedName("code")
+    String regCode;
+    @SerializedName("mobile")
+    String regMobile;
     @SerializedName("email")
-    String emailId;
-    @SerializedName("country_code")
-    String countryCode;
-    @SerializedName("phone_no")
-    String phoneNo;
-    @SerializedName("language")
-    String lanuage;
-    @SerializedName("device_type")
-    String diviceType;
-    @SerializedName("user_name")
-    String Username;
+    String regEmail;
+    @SerializedName("iqama_id")
+    String regIqamaId;
+    @SerializedName("Upload Iqama/ID")
+    String regUpladIqmaID;
+    @SerializedName("Upload license")
+    String regLicence;
+    @SerializedName("vehicle_type")
+    String regVehicleType;
+    @SerializedName("supplier")
+    String regSupplier;
+    @SerializedName("join_date")
+    String date;
     @SerializedName("password")
-    String password;
+    String regPassword;
+    @SerializedName("vehicle_number")
+    String RegVehicleNumber;
+    @SerializedName("profile_image")
+    String profilepath;
 
-    public String getUsername() {
-        return Username;
+
+    public String getRegName() {
+        return regName;
     }
 
-    public void setUsername(String username) {
-        Username = username;
+    public void setRegName(String regName) {
+        this.regName = regName;
     }
 
-    public String getPassword() {
-        return password;
+    public String getRegCountry() {
+        return regCountry;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setRegCountry(String regCountry) {
+        this.regCountry = regCountry;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getRegState() {
+        return regState;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setRegState(String regState) {
+        this.regState = regState;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getRegCode() {
+        return regCode;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setRegCode(String regCode) {
+        this.regCode = regCode;
     }
 
-    public String getGender() {
-        return gender;
+    public String getRegMobile() {
+        return regMobile;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setRegMobile(String regMobile) {
+        this.regMobile = regMobile;
     }
 
-    public String getDob() {
-        return dob;
+    public String getRegEmail() {
+        return regEmail;
     }
 
-    public void setDob(String dob) {
-        this.dob = dob;
+    public void setRegEmail(String regEmail) {
+        this.regEmail = regEmail;
     }
 
-    public String getEmailId() {
-        return emailId;
+    public String getRegIqamaId() {
+        return regIqamaId;
     }
 
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
+    public void setRegIqamaId(String regIqamaId) {
+        this.regIqamaId = regIqamaId;
     }
 
-    public String getCountryCode() {
-        return countryCode;
+    public String getRegUpladIqmaID() {
+        return regUpladIqmaID;
     }
 
-    public void setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
+    public void setRegUpladIqmaID(String regUpladIqmaID) {
+        this.regUpladIqmaID = regUpladIqmaID;
     }
 
-    public String getPhoneNo() {
-        return phoneNo;
+    public String getRegLicence() {
+        return regLicence;
     }
 
-    public void setPhoneNo(String phoneNo) {
-        this.phoneNo = phoneNo;
+    public void setRegLicence(String regLicence) {
+        this.regLicence = regLicence;
     }
 
-    public String getLanuage() {
-        return lanuage;
+    public String getRegVehicleType() {
+        return regVehicleType;
     }
 
-    public void setLanuage(String lanuage) {
-        this.lanuage = lanuage;
+    public void setRegVehicleType(String regVehicleType) {
+        this.regVehicleType = regVehicleType;
     }
 
-    public String getDiviceType() {
-        return diviceType;
+    public String getRegSupplier() {
+        return regSupplier;
     }
 
-    public void setDiviceType(String diviceType) {
-        this.diviceType = diviceType;
+    public void setRegSupplier(String regSupplier) {
+        this.regSupplier = regSupplier;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getRegPassword() {
+        return regPassword;
+    }
+
+    public void setRegPassword(String regPassword) {
+        this.regPassword = regPassword;
+    }
+
+    public String getRegVehicleNumber() {
+        return RegVehicleNumber;
+    }
+
+    public void setRegVehicleNumber(String regVehicleNumber) {
+        RegVehicleNumber = regVehicleNumber;
+    }
+
+    public String getProfilepath() {
+        return profilepath;
+    }
+
+    public void setProfilepath(String profilepath) {
+        this.profilepath = profilepath;
     }
 }
+
+
+

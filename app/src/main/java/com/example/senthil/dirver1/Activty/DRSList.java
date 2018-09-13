@@ -1,21 +1,36 @@
 package com.example.senthil.dirver1.Activty;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.example.senthil.dirver1.Login;
+import com.example.senthil.dirver1.Pojo.DRSListPOjo;
+import com.example.senthil.dirver1.Pojo.RrgPojo;
 import com.example.senthil.dirver1.Profile;
 import com.example.senthil.dirver1.R;
+import com.example.senthil.dirver1.Retrofit.APIClient;
+import com.example.senthil.dirver1.Retrofit.APIInterface;
+import com.example.senthil.dirver1.Utilits.AppConstants;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DRSList extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    APIInterface apiInterface;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +48,50 @@ public class DRSList extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        serverCall();
+    }
+
+    private void serverCall() {
+        apiInterface = APIClient.getClient().create(APIInterface.class);
+        String lanuage="en",divicetype="2";
+        Call<DRSListPOjo> call2 = apiInterface.DeliveryList(lanuage,divicetype);
+        final ProgressDialog progressDoalog;
+        progressDoalog = new ProgressDialog(DRSList.this);
+        progressDoalog.setMax(100);
+        progressDoalog.setMessage("Loading....");
+        progressDoalog.setTitle("Please Wait...");
+        progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDoalog.show();
+        call2.enqueue(new Callback<DRSListPOjo>() {
+
+
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            public void onResponse(Call<DRSListPOjo> call, Response<DRSListPOjo> response) {
+
+                progressDoalog.dismiss();
+                if(response.isSuccessful()) {
+                    if (response.body().isStatus()==true) {
+                        Toast.makeText(getApplicationContext(),response.body().getMessage(),Toast.LENGTH_SHORT).show();
+
+
+                    }else{
+                        Toast.makeText(getApplicationContext(),response.body().getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                }else {
+                    Toast.makeText(getApplicationContext(),"Server Failed",Toast.LENGTH_LONG).show();
+                }
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<DRSListPOjo> call, Throwable t) {
+                Log.e("Error at server",t.toString());
+
+            }
+        });
     }
 
     @Override

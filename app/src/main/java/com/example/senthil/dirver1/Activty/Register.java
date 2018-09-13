@@ -1,11 +1,19 @@
 package com.example.senthil.dirver1.Activty;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -25,6 +33,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.senthil.dirver1.Pojo.RegisterPoJo;
@@ -35,6 +44,11 @@ import com.example.senthil.dirver1.Retrofit.APIInterface;
 import com.example.senthil.dirver1.Utilits.NetworkState;
 import com.google.gson.Gson;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Calendar;
 
 import am.appwise.components.ni.NoInternetDialog;
@@ -46,15 +60,27 @@ import retrofit2.Response;
 
 public class Register extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    @BindView(R.id.firstName)EditText firstName;
-    @BindView(R.id.lastName)EditText lastName;
-    @BindView(R.id.gender)Spinner gender;
-    @BindView(R.id.dob)EditText dob;
-    @BindView(R.id.imgdob)ImageButton imageButton;
-    @BindView(R.id.email)EditText emailId;
-    @BindView(R.id.contrycode)EditText countryCode;
-    @BindView(R.id.phone)EditText phone;
-    @BindView(R.id.language)Spinner language;
+
+
+    @BindView(R.id.name)EditText regName;
+    @BindView(R.id.country)EditText regCountry;
+    @BindView(R.id.state)EditText regState;
+    @BindView(R.id.code)EditText regCode;
+    @BindView(R.id.mobileNo) EditText regMobile;
+    @BindView(R.id.email)EditText regEmail;
+    @BindView(R.id.iqamaId)EditText regIqamaId;
+    @BindView(R.id.uploadIqamaId)TextView regUpladIqmaID;
+            @BindView(R.id.lincence)TextView regLicence;
+            @BindView(R.id.vehicle_type)EditText regVehicleType;
+            @BindView(R.id.supplier)EditText regSupplier;
+            @BindView(R.id.date)TextView date;
+            @BindView(R.id.reg_password)EditText regPassword;
+            @BindView(R.id.vehicle_number)EditText RegVehicleNumber;
+            @BindView(R.id.profile)TextView profilepath;
+
+            String fileName="Profile.png";
+
+
     APIInterface apiInterface;
     DatePickerDialog datePickerDialog;
     int year;
@@ -84,37 +110,7 @@ public class Register extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        String[] Gender=getResources().getStringArray(R.array.Gender);
-        String[] Language=getResources().getStringArray(R.array.Language);
-        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,Gender);
-        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        gender.setAdapter(aa);
-        ArrayAdapter aaa = new ArrayAdapter(Register.this,android.R.layout.simple_spinner_item,Language);
-        aaa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        language.setAdapter(aaa);
 
-        gender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-               registerPoJo.setGender( parent.getItemAtPosition(position).toString());
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        language.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                registerPoJo.setLanuage(parent.getItemAtPosition(position).toString());
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
     }
 
     @Override
@@ -193,60 +189,37 @@ public class Register extends AppCompatActivity
     }
 
     public void getRegisteration(View view) {
-
-
-
-
-
-
-
-        inputValidation();
-
-    }
-
-    private void inputValidation() {
-
-
-            registerPoJo.setFirstName(firstName.getText().toString());
-
-
-            registerPoJo.setLastName(lastName.getText().toString());
-
-
-            registerPoJo.setDob(dob.getText().toString());
-
-
-            registerPoJo.setEmailId(emailId.getText().toString());
-
-
-            registerPoJo.setCountryCode(countryCode.getText().toString());
-
-
-            registerPoJo.setPhoneNo(phone.getText().toString());
-
-            registerPoJo.setUsername("admin");
-            registerPoJo.setPassword("admin@2227328297");
-
-        registerPoJo.setDiviceType("2");
-        try {
-            Gson gson = new Gson();
-            String json = gson.toJson(registerPoJo);
-            System.out.println(json);
-            if (myNet.isInternetOn()) {
-                ServerCall(json);
-            } else {
-                noInternetDialog.showDialog();
-            }
-        }catch (Exception ex){
-            ex.printStackTrace();
-        }
+        RegisterPoJo registerPoJo =new RegisterPoJo();
+        registerPoJo.setRegName(regName.getText().toString());
+        registerPoJo.setRegCountry(regCountry.getText().toString());
+        registerPoJo.setRegState(regState.getText().toString());
+        registerPoJo.setRegCode(regCode.getText().toString());
+        registerPoJo.setRegMobile(regMobile.getText().toString());
+        registerPoJo.setRegEmail(regEmail.getText().toString());
+        registerPoJo.setRegIqamaId(regIqamaId.getText().toString());
+        registerPoJo.setRegUpladIqmaID(regUpladIqmaID.getText().toString());
+        registerPoJo.setRegLicence(regLicence.getText().toString());
+        registerPoJo.setRegVehicleType(regVehicleType.getText().toString());
+        registerPoJo.setRegSupplier(regSupplier.getText().toString());
+        registerPoJo.setDate(date.getText().toString());
+        registerPoJo.setProfilepath(profilepath.getText().toString());
+        registerPoJo.setRegVehicleNumber(RegVehicleNumber.getText().toString());
+        registerPoJo.setRegPassword(regPassword.getText().toString());
+      /*  Gson gson = new Gson();
+        String json = gson.toJson(registerPoJo);
+        Log.e("Json",json);*/
+        ServerCall(registerPoJo);
 
     }
 
-    private void ServerCall(String json) {
+
+    private void ServerCall(RegisterPoJo json) {
 
         apiInterface = APIClient.getClient().create(APIInterface.class);
-        Call<Object> call2 = apiInterface.RegisterPost( json.toString());
+        Call<Object> call2 = apiInterface.RegisterPost( json.getRegName(),json.getRegCountry(),json.getRegState(),json.getRegCode(),
+                json.getRegMobile(),json.getRegEmail(),json.getRegIqamaId(),json.getRegUpladIqmaID(),json.getRegLicence(),
+                json.getRegVehicleType(),json.getRegSupplier(),json.getDate(),json.getRegPassword(),json.getRegVehicleNumber(),
+                json.getProfilepath());
         final ProgressDialog progressDoalog;
         progressDoalog = new ProgressDialog(Register.this);
         progressDoalog.setMax(100);
@@ -274,6 +247,73 @@ public class Register extends AppCompatActivity
     }
 
     public void getDob(View view) {
+      /*  */
+    }
+
+
+    public void getIQMAImage(View view) {
+       // selectImage();
+        regUpladIqmaID.setText(fileName);
+    }
+
+    private void selectImage() {
+        final CharSequence[] options = { "Take Photo", "Choose from Gallery","Cancel" };
+
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(Register.this);
+
+        builder.setTitle("Add Photo!");
+
+        builder.setItems(options, new DialogInterface.OnClickListener() {
+
+            @Override
+
+            public void onClick(DialogInterface dialog, int item) {
+
+                if (options[item].equals("Take Photo"))
+
+                { Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+                    File f = new File(android.os.Environment.getExternalStorageDirectory(), "temp.jpg");
+
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
+
+                    startActivityForResult(intent, 1);
+
+                }
+
+                else if (options[item].equals("Choose from Gallery"))
+
+                {
+
+                    Intent intent = new   Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+                    startActivityForResult(intent, 2);
+
+
+
+                }
+
+                else if (options[item].equals("Cancel")) {
+
+                    dialog.dismiss();
+
+                }
+
+            }
+
+        });
+
+        builder.show();
+    }
+
+    public void getProfileImg(View view) {
+       // selectImage();
+        profilepath.setText(fileName);
+    }
+
+    public void getDateofjoin(View view) {
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
@@ -282,7 +322,7 @@ public class Register extends AppCompatActivity
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                        dob.setText(day + "-" + (month + 1) + "-" + year);
+                        date.setText((month + 1) + "/" +day + "/" + year);
                     }
                 }, year, month, dayOfMonth);
 
@@ -290,4 +330,127 @@ public class Register extends AppCompatActivity
     }
 
 
+    public void getLincenceImage(View view) {
+        //selectImage();
+
+        regLicence.setText(fileName);
+    }
+
+    @SuppressLint("LongLogTag")
+    @Override
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+
+            if (requestCode == 1) {
+
+                File f = new File(Environment.getExternalStorageDirectory().toString());
+
+                for (File temp : f.listFiles()) {
+
+                    if (temp.getName().equals("temp.jpg")) {
+
+                        f = temp;
+
+                        break;
+
+                    }
+
+                }
+
+                try {
+
+                    Bitmap bitmap;
+
+                    BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
+
+
+
+                    bitmap = BitmapFactory.decodeFile(f.getAbsolutePath(),
+
+                            bitmapOptions);
+
+
+
+
+
+
+
+                    String path = android.os.Environment
+
+                            .getExternalStorageDirectory()
+
+                            + File.separator
+
+                            + "Phoenix" + File.separator + "default";
+
+                    f.delete();
+
+                    OutputStream outFile = null;
+
+                    File file = new File(path, String.valueOf(System.currentTimeMillis()) + ".jpg");
+                    fileName=file.getName();
+
+                    try {
+
+                        outFile = new FileOutputStream(file);
+
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 85, outFile);
+
+                        outFile.flush();
+
+                        outFile.close();
+
+                    } catch (FileNotFoundException e) {
+
+                        e.printStackTrace();
+
+                    } catch (IOException e) {
+
+                        e.printStackTrace();
+
+                    } catch (Exception e) {
+
+                        e.printStackTrace();
+
+                    }
+
+                } catch (Exception e) {
+
+                    e.printStackTrace();
+
+                }
+
+            } else if (requestCode == 2) {
+
+
+
+                Uri selectedImage = data.getData();
+
+                String[] filePath = { MediaStore.Images.Media.DATA };
+
+                Cursor c = getContentResolver().query(selectedImage,filePath, null, null, null);
+
+                c.moveToFirst();
+
+                int columnIndex = c.getColumnIndex(filePath[0]);
+
+                String picturePath = c.getString(columnIndex);
+
+                c.close();
+
+                Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
+
+                Log.w("path of image from gallery......******************.........", picturePath+"");
+
+            fileName=picturePath;
+
+            }
+
+        }
+
+    }
 }
