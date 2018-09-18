@@ -18,49 +18,88 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:padding="@dimen/fab_margin">
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/name"
+        android:inputType="textPersonName"
         android:background="@drawable/edittextoutline"
         android:hint="@string/reg_Name"
         android:padding="5dp"/>
-
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/country"
         android:padding="5dp"
+        android:inputType="textPersonName"
         android:background="@drawable/edittextoutline"
         android:hint="@string/reg_country"/>
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/state"
         android:padding="5dp"
+        android:inputType="textPersonName"
         android:background="@drawable/edittextoutline"
         android:hint="@string/reg_state"/>
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/code"
         android:padding="5dp"
+        android:inputType="number"
         android:background="@drawable/edittextoutline"
         android:hint="@string/reg_code"/>
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/mobileNo"
         android:padding="5dp"
+        android:inputType="number"
         android:background="@drawable/edittextoutline"
         android:hint="@string/mobile"/>
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/email"
         android:padding="5dp"
+        android:inputType="textEmailAddress"
         android:background="@drawable/edittextoutline"
         android:hint="@string/reg_email"/>
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -68,12 +107,18 @@
         android:padding="5dp"
         android:background="@drawable/edittextoutline"
         android:hint="@string/reg_iqama_id"/>
-
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/reg_iqmqimg"
+        >
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="5dp"
+
         >
         <TextView
             android:layout_width="fill_parent"
@@ -89,7 +134,12 @@
             android:background="@color/white"
             android:onClick="getIQMAImage"/>
     </LinearLayout>
-
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/reg_licence"
+        >
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -110,6 +160,11 @@
             android:background="@color/white"
             android:onClick="getLincenceImage"/>
     </LinearLayout>
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -117,6 +172,11 @@
         android:id="@+id/vehicle_type"
         android:padding="5dp"
         android:hint="@string/reg_vehicle_type"/>
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -124,7 +184,11 @@
         android:id="@+id/supplier"
         android:padding="5dp"
         android:hint="@string/reg_supplier"/>
-
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -145,13 +209,24 @@
             android:background="@color/white"
             android:onClick="getDateofjoin"/>
     </LinearLayout>
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:hint="@string/reg_password"
         android:id="@+id/reg_password"
+        android:inputType="textPassword"
         android:background="@drawable/edittextoutline"
         android:padding="5dp"/>
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -160,6 +235,11 @@
         android:padding="5dp"
         android:hint="@string/reg_vehicle_type"
         />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -180,7 +260,7 @@
         android:background="@color/white"
         android:onClick="getProfileImg"/>
 </LinearLayout>
-
+    </android.support.design.widget.TextInputLayout>
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

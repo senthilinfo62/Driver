@@ -36,13 +36,22 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.androidnetworking.interfaces.UploadProgressListener;
+import com.bumptech.glide.Priority;
+import com.example.senthil.dirver1.Login;
 import com.example.senthil.dirver1.Pojo.RegisterPoJo;
+import com.example.senthil.dirver1.Pojo.RegisterationPojo;
 import com.example.senthil.dirver1.Profile;
 import com.example.senthil.dirver1.R;
 import com.example.senthil.dirver1.Retrofit.APIClient;
 import com.example.senthil.dirver1.Retrofit.APIInterface;
 import com.example.senthil.dirver1.Utilits.NetworkState;
 import com.google.gson.Gson;
+
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -101,7 +110,7 @@ public class Register extends AppCompatActivity
         ButterKnife.bind(this);
         noInternetDialog = new NoInternetDialog.Builder(Register.this).build();
         myNet=new NetworkState(Register.this);
-
+        AndroidNetworking.initialize(getApplicationContext());
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -123,25 +132,9 @@ public class Register extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.register, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
 
 
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
-        return super.onOptionsItemSelected(item);
-    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -205,21 +198,23 @@ public class Register extends AppCompatActivity
         registerPoJo.setProfilepath(profilepath.getText().toString());
         registerPoJo.setRegVehicleNumber(RegVehicleNumber.getText().toString());
         registerPoJo.setRegPassword(regPassword.getText().toString());
-      /*  Gson gson = new Gson();
+       Gson gson = new Gson();
         String json = gson.toJson(registerPoJo);
-        Log.e("Json",json);*/
-        ServerCall(registerPoJo);
+        Log.e("Json",json);
+        ServerCall(json);
 
     }
 
 
-    private void ServerCall(RegisterPoJo json) {
+    private void ServerCall(String json) {
 
         apiInterface = APIClient.getClient().create(APIInterface.class);
-        Call<Object> call2 = apiInterface.RegisterPost( json.getRegName(),json.getRegCountry(),json.getRegState(),json.getRegCode(),
+       /* Call<RegisterationPojo> call2 = apiInterface.RegisterPost( json.getRegName(),json.getRegCountry(),json.getRegState(),json.getRegCode(),
                 json.getRegMobile(),json.getRegEmail(),json.getRegIqamaId(),json.getRegUpladIqmaID(),json.getRegLicence(),
                 json.getRegVehicleType(),json.getRegSupplier(),json.getDate(),json.getRegPassword(),json.getRegVehicleNumber(),
-                json.getProfilepath());
+                json.getProfilepath());*/
+
+        Call<RegisterationPojo> call2 = apiInterface.RegisterPost1(json);
         final ProgressDialog progressDoalog;
         progressDoalog = new ProgressDialog(Register.this);
         progressDoalog.setMax(100);
@@ -227,18 +222,40 @@ public class Register extends AppCompatActivity
         progressDoalog.setTitle("Please Wait...");
         progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDoalog.show();
-        call2.enqueue(new Callback< Object>() {
+        call2.enqueue(new Callback<RegisterationPojo>() {
 
 
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-            public void onResponse(Call<Object> call, Response<Object> response) {
-                response.body();
+            public void onResponse(Call<RegisterationPojo> call, Response<RegisterationPojo> response) {
+
                 progressDoalog.dismiss();
-                Log.e(" server",response.body().toString());
+                if(response.isSuccessful()) {
+                    if (response.body().isStatus() == true) {
+                        Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(Register.this, Login.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }else{
+                    switch (response.code()) {
+                        case 404:
+                            Toast.makeText(getApplicationContext(), "not found", Toast.LENGTH_SHORT).show();
+                            break;
+                        case 500:
+                            Toast.makeText(getApplicationContext(), "server broken", Toast.LENGTH_SHORT).show();
+                            break;
+                        default:
+                            Toast.makeText(getApplicationContext(), "unknown error", Toast.LENGTH_SHORT).show();
+                            break;
+                    }
+                }
+
             }
 
             @Override
-            public void onFailure(Call< Object> call, Throwable t) {
+            public void onFailure(Call< RegisterationPojo> call, Throwable t) {
                 Log.e("Error at server",t.toString());
 
             }
@@ -246,13 +263,11 @@ public class Register extends AppCompatActivity
 
     }
 
-    public void getDob(View view) {
-      /*  */
-    }
+
 
 
     public void getIQMAImage(View view) {
-       // selectImage();
+        selectImage();
         regUpladIqmaID.setText(fileName);
     }
 
@@ -404,6 +419,29 @@ public class Register extends AppCompatActivity
 
                         outFile.close();
 
+                       /* AndroidNetworking.upload(url)
+                                .addMultipartFile("image",bitmap)
+                                .addMultipartParameter("key","value")
+                                .setTag("uploadTest")
+                                .setPriority(Priority.HIGH)
+                                .build()
+                                .setUploadProgressListener(new UploadProgressListener() {
+                                    @Override
+                                    public void onProgress(long bytesUploaded, long totalBytes) {
+                                        // do anything with progress
+                                    }
+                                })
+                                .getAsJSONObject(new JSONObjectRequestListener() {
+                                    @Override
+                                    public void onResponse(JSONObject response) {
+                                        // do anything with response
+                                    }
+                                    @Override
+                                    public void onError(ANError error) {
+                                        // handle error
+                                    }
+                                });*/
+
                     } catch (FileNotFoundException e) {
 
                         e.printStackTrace();
@@ -446,7 +484,28 @@ public class Register extends AppCompatActivity
 
                 Log.w("path of image from gallery......******************.........", picturePath+"");
 
-            fileName=picturePath;
+              /*  AndroidNetworking.upload(url)
+                        .addMultipartFile("image",thumbnail)
+                        .addMultipartParameter("key","value")
+                        .setTag("uploadTest")
+                        .setPriority(Priority.HIGH)
+                        .build()
+                        .setUploadProgressListener(new UploadProgressListener() {
+                            @Override
+                            public void onProgress(long bytesUploaded, long totalBytes) {
+                                // do anything with progress
+                            }
+                        })
+                        .getAsJSONObject(new JSONObjectRequestListener() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                // do anything with response
+                            }
+                            @Override
+                            public void onError(ANError error) {
+                                // handle error
+                            }
+                        });*/
 
             }
 

@@ -197,7 +197,17 @@ public class EditProfile extends AppCompatActivity
                     }
 
                 }else {
-                    Toast.makeText(getApplicationContext(),"Server Failed",Toast.LENGTH_LONG).show();
+                    switch (response.code()) {
+                        case 404:
+                            Toast.makeText(getApplicationContext(), "not found", Toast.LENGTH_SHORT).show();
+                            break;
+                        case 500:
+                            Toast.makeText(getApplicationContext(), "server broken", Toast.LENGTH_SHORT).show();
+                            break;
+                        default:
+                            Toast.makeText(getApplicationContext(), "unknown error", Toast.LENGTH_SHORT).show();
+                            break;
+                    }
                 }
 
 

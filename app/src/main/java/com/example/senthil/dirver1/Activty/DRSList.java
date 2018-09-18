@@ -10,11 +10,17 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
+import com.example.senthil.dirver1.Adapter.DRSAdapter;
+import com.example.senthil.dirver1.Desgin.SimpleDividerItemDecoration;
 import com.example.senthil.dirver1.Login;
 import com.example.senthil.dirver1.Pojo.DRSListPOjo;
 import com.example.senthil.dirver1.Pojo.RrgPojo;
@@ -24,6 +30,8 @@ import com.example.senthil.dirver1.Retrofit.APIClient;
 import com.example.senthil.dirver1.Retrofit.APIInterface;
 import com.example.senthil.dirver1.Utilits.AppConstants;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -31,13 +39,19 @@ import retrofit2.Response;
 public class DRSList extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     APIInterface apiInterface;
+    @BindView(R.id.recycler_view)
+    RecyclerView recyclerView;
+
+    private DRSAdapter mAdapter;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drslist2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        ButterKnife.bind(this);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -73,13 +87,32 @@ public class DRSList extends AppCompatActivity
                 if(response.isSuccessful()) {
                     if (response.body().isStatus()==true) {
                         Toast.makeText(getApplicationContext(),response.body().getMessage(),Toast.LENGTH_SHORT).show();
+                        mAdapter = new DRSAdapter(response.body().getDelievery_data(),DRSList.this);
+                        recyclerView.addItemDecoration(new SimpleDividerItemDecoration(getApplicationContext()));
+                        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                        recyclerView.setLayoutManager(mLayoutManager);
+
+                        recyclerView.setItemAnimator(new DefaultItemAnimator());
+                        recyclerView.setAdapter(mAdapter);
+
+
 
 
                     }else{
                         Toast.makeText(getApplicationContext(),response.body().getMessage(),Toast.LENGTH_SHORT).show();
                     }
                 }else {
-                    Toast.makeText(getApplicationContext(),"Server Failed",Toast.LENGTH_LONG).show();
+                    switch (response.code()) {
+                        case 404:
+                            Toast.makeText(getApplicationContext(), "not found", Toast.LENGTH_SHORT).show();
+                            break;
+                        case 500:
+                            Toast.makeText(getApplicationContext(), "server broken", Toast.LENGTH_SHORT).show();
+                            break;
+                        default:
+                            Toast.makeText(getApplicationContext(), "unknown error", Toast.LENGTH_SHORT).show();
+                            break;
+                    }
                 }
 
 

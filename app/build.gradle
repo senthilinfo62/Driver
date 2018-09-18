@@ -48,4 +48,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation 'am.appwise.components:NoInternetDialog:1.1.3'
     implementation files('libs/glide-3.6.0.jar')
+
+    implementation 'com.google.android.gms:play-services-vision:11.8.0'
+    implementation'com.amitshekhar.android:android-networking:1.0.2'
 }
