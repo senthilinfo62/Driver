@@ -1,28 +1,58 @@
 package com.example.senthil.dirver1.Activty;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.senthil.dirver1.Adapter.DRSAdapter;
+import com.example.senthil.dirver1.Adapter.PickupAdapter;
+import com.example.senthil.dirver1.Desgin.SimpleDividerItemDecoration;
+import com.example.senthil.dirver1.Login;
+import com.example.senthil.dirver1.Pojo.DRSListPOjo;
+import com.example.senthil.dirver1.Pojo.PickupPojo;
 import com.example.senthil.dirver1.Profile;
 import com.example.senthil.dirver1.R;
+import com.example.senthil.dirver1.Retrofit.APIClient;
+import com.example.senthil.dirver1.Retrofit.APIInterface;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PickupList extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    APIInterface apiInterface;
+    @BindView(R.id.recycler_view)
+    RecyclerView recyclerView;
 
+    private PickupAdapter mAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pickup_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        ButterKnife.bind(this);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -33,6 +63,77 @@ public class PickupList extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View hView =  navigationView.getHeaderView(0);
+        SharedPreferences pref;
+        pref = getSharedPreferences("Hyper", MODE_PRIVATE);
+
+        TextView nav_user = hView.findViewById(R.id.username);
+        nav_user.setText(pref.getString("UserName",""));
+        TextView nav_email = hView.findViewById(R.id.email);
+        nav_email.setText(pref.getString("Username",""));
+        final ImageView imageView = hView.findViewById(R.id.imageView);
+        serverCall();
+    }
+
+    private void serverCall() {
+        apiInterface = APIClient.getClient().create(APIInterface.class);
+        String lanuage="en",divicetype="2";
+        Call<PickupPojo> call2 = apiInterface.PickupList(lanuage,divicetype);
+        final ProgressDialog progressDoalog;
+        progressDoalog = new ProgressDialog(PickupList.this);
+        progressDoalog.setMax(100);
+        progressDoalog.setMessage("Loading....");
+        progressDoalog.setTitle("Please Wait...");
+        progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDoalog.show();
+        call2.enqueue(new Callback<PickupPojo>() {
+
+
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            public void onResponse(Call<PickupPojo> call, Response<PickupPojo> response) {
+
+                progressDoalog.dismiss();
+                if(response.isSuccessful()) {
+                    if (response.body().isStatus()==true) {
+                        Toast.makeText(getApplicationContext(),response.body().getMessage(),Toast.LENGTH_SHORT).show();
+                        mAdapter = new PickupAdapter(response.body().getPickup_data(),PickupList.this);
+                        recyclerView.addItemDecoration(new SimpleDividerItemDecoration(getApplicationContext()));
+                        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                        recyclerView.setLayoutManager(mLayoutManager);
+
+                        recyclerView.setItemAnimator(new DefaultItemAnimator());
+                        recyclerView.setAdapter(mAdapter);
+
+
+
+
+                    }else{
+                        Toast.makeText(getApplicationContext(),response.body().getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                }else {
+                    switch (response.code()) {
+                        case 404:
+                            Toast.makeText(getApplicationContext(), "not found", Toast.LENGTH_SHORT).show();
+                            break;
+                        case 500:
+                            Toast.makeText(getApplicationContext(), "server broken", Toast.LENGTH_SHORT).show();
+                            break;
+                        default:
+                            Toast.makeText(getApplicationContext(), "unknown error", Toast.LENGTH_SHORT).show();
+                            break;
+                    }
+                }
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<PickupPojo> call, Throwable t) {
+                Log.e("Error at server",t.toString());
+
+            }
+        });
     }
 
    /* @Override
@@ -104,7 +205,14 @@ public class PickupList extends AppCompatActivity
             Intent pickHistory=new Intent(PickupList.this,PickupHistory.class);
             startActivity(pickHistory);
         }else if (id == R.id.nav_logout) {
-
+            SharedPreferences pref = getSharedPreferences("Hyper", MODE_PRIVATE);
+            SharedPreferences.Editor et = pref.edit();
+            et.remove("Username");
+            et.remove("Password");
+            et.commit();
+            Intent intent = new Intent(getApplicationContext(), Login.class);
+            startActivity(intent);
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

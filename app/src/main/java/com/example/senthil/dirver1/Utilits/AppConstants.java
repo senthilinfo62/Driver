@@ -5,4 +5,5 @@ public class AppConstants {
     public static String userName;
     public static String passWord;
 
+
 }

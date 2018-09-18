@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name">Driver</string>
+    <string name="app_name">3Qs Express</string>
     <string name="title_activity_dashboard">Dashboard</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -53,13 +53,25 @@
     <string name="reg_btn">Register </string>
 
 
-
-
-
     <string name="title_activity_forgot_password">ForgotPassword</string>
     <string name="forgotEmail">Email Id</string>
     <string name="newpassword">New Password</string>
     <string name="confirmPassword">Confirm Password</string>
     <string name="forgotbtn">Change Password</string>
+    <string name="title_activity_splash">LogIn</string>
+    <string name="title_activity_delivery_update">Delivery Update</string>
 
+
+    <string-array name="DeliveryStatus">
+    <item>-Select-</item>
+    <item>PickUp</item>
+    <item>intransit</item>
+    <item>arrived to designation</item>
+    <item>out For Delievery</item>
+    <item>delievery</item>
+  
+    </string-array>
+
+    <string name="dvTrackID">Track ID</string>
+    <string name="shipment_status">Shipment Status</string>
 </resources>

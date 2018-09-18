@@ -2,19 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.senthil.dirver1">
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
-
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
     <uses-permission android:name="android.permission.CAMERA" />
-
 
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
@@ -22,14 +20,14 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:theme">
         <activity
-            android:name=".Login"
+            android:name=".Activty.SplashActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme">
             <intent-filter>
@@ -81,6 +79,14 @@
         <activity
             android:name=".Activty.ForgotPassword"
             android:label="@string/title_activity_forgot_password"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Login"
+            android:label="@string/title_activity_splash"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Activty.DeliveryUpdate"
+            android:label="@string/title_activity_delivery_update"
             android:theme="@style/AppTheme"></activity>
     </application>
 

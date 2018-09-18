@@ -2,6 +2,7 @@ package com.example.senthil.dirver1;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
@@ -53,6 +54,7 @@ public class Profile extends AppCompatActivity
     @BindView(R.id.VericleNo)TextView vericleNo;
     @BindView(R.id.MobileNo)TextView mobileNo;
     APIInterface apiInterface;
+    SharedPreferences pref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +62,7 @@ public class Profile extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ButterKnife.bind(this);
-
+        pref = getSharedPreferences("Hyper", MODE_PRIVATE);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -70,13 +72,24 @@ public class Profile extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View hView =  navigationView.getHeaderView(0);
+        SharedPreferences pref;
+        pref = getSharedPreferences("Hyper", MODE_PRIVATE);
+
+        TextView nav_user = hView.findViewById(R.id.username);
+        nav_user.setText(pref.getString("UserName",""));
+        TextView nav_email = hView.findViewById(R.id.email);
+        nav_email.setText(pref.getString("Username",""));
+        final ImageView imageView = hView.findViewById(R.id.imageView);
+
         Servercall();
     }
 
     private void Servercall() {
         apiInterface = APIClient.getClient().create(APIInterface.class);
-
-        Call<RrgPojo> call2 = apiInterface.LoginPost(AppConstants.userName,AppConstants.passWord);
+        String  user = pref.getString("Username", "");
+        String   pass = pref.getString("Password", "");
+        Call<RrgPojo> call2 = apiInterface.LoginPost(user,pass);
         final ProgressDialog progressDoalog;
         progressDoalog = new ProgressDialog(Profile.this);
         progressDoalog.setMax(100);
@@ -192,7 +205,14 @@ public class Profile extends AppCompatActivity
             Intent pickHistory=new Intent(Profile.this,PickupHistory.class);
             startActivity(pickHistory);
         }else if (id == R.id.nav_logout) {
-
+            SharedPreferences pref = getSharedPreferences("Hyper", MODE_PRIVATE);
+            SharedPreferences.Editor et = pref.edit();
+            et.remove("Username");
+            et.remove("Password");
+            et.commit();
+            Intent intent = new Intent(getApplicationContext(), Login.class);
+            startActivity(intent);
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

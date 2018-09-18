@@ -1,8 +1,12 @@
 package com.example.senthil.dirver1.Activty;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -10,8 +14,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.example.senthil.dirver1.EditProfile;
+import com.example.senthil.dirver1.Login;
 import com.example.senthil.dirver1.Profile;
 import com.example.senthil.dirver1.R;
 
@@ -35,6 +44,16 @@ public class Dashboard extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View hView =  navigationView.getHeaderView(0);
+        SharedPreferences pref;
+        pref = getSharedPreferences("Hyper", MODE_PRIVATE);
+
+        TextView nav_user = hView.findViewById(R.id.username);
+        nav_user.setText(pref.getString("UserName",""));
+        TextView nav_email = hView.findViewById(R.id.email);
+        nav_email.setText(pref.getString("Username",""));
+        final ImageView imageView = hView.findViewById(R.id.imageView);
+
 
     }
 
@@ -88,7 +107,14 @@ public class Dashboard extends AppCompatActivity
             Intent pickHistory=new Intent(Dashboard.this,PickupHistory.class);
             startActivity(pickHistory);
         }else if (id == R.id.nav_logout) {
-
+            SharedPreferences pref = getSharedPreferences("Hyper", MODE_PRIVATE);
+            SharedPreferences.Editor et = pref.edit();
+            et.remove("Username");
+            et.remove("Password");
+            et.commit();
+            Intent intent = new Intent(getApplicationContext(), Login.class);
+            startActivity(intent);
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -140,5 +166,13 @@ public class Dashboard extends AppCompatActivity
     }
 
     public void getLogout(View view) {
+        SharedPreferences pref = getSharedPreferences("Hyper", MODE_PRIVATE);
+        SharedPreferences.Editor et = pref.edit();
+        et.remove("Username");
+        et.remove("Password");
+        et.commit();
+        Intent intent = new Intent(getApplicationContext(), Login.class);
+        startActivity(intent);
+        finish();
     }
 }

@@ -1,6 +1,10 @@
 package com.example.senthil.dirver1.Pojo;
 
-public class DRSListData {
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+
+public class DRSListData implements Serializable {
     private String id;
     private String track_id;
     private String reference;

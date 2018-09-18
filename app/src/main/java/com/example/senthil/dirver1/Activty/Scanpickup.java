@@ -2,6 +2,7 @@ package com.example.senthil.dirver1.Activty;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,9 +19,11 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.senthil.dirver1.Login;
 import com.example.senthil.dirver1.Profile;
 import com.example.senthil.dirver1.R;
 import com.google.android.gms.vision.CameraSource;
@@ -58,6 +61,16 @@ public class Scanpickup extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View hView =  navigationView.getHeaderView(0);
+        SharedPreferences pref;
+        pref = getSharedPreferences("Hyper", MODE_PRIVATE);
+
+        TextView nav_user = hView.findViewById(R.id.username);
+        nav_user.setText(pref.getString("UserName",""));
+        TextView nav_email = hView.findViewById(R.id.email);
+        nav_email.setText(pref.getString("Username",""));
+        final ImageView imageView = hView.findViewById(R.id.imageView);
+
         initViews();
     }
 
@@ -133,7 +146,14 @@ public class Scanpickup extends AppCompatActivity
             Intent pickHistory=new Intent(Scanpickup.this,PickupHistory.class);
             startActivity(pickHistory);
         }else if (id == R.id.nav_logout) {
-
+            SharedPreferences pref = getSharedPreferences("Hyper", MODE_PRIVATE);
+            SharedPreferences.Editor et = pref.edit();
+            et.remove("Username");
+            et.remove("Password");
+            et.commit();
+            Intent intent = new Intent(getApplicationContext(), Login.class);
+            startActivity(intent);
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

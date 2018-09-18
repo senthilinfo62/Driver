@@ -1,7 +1,6 @@
 package com.example.senthil.dirver1.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,20 +10,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.senthil.dirver1.Activty.DRSList;
-import com.example.senthil.dirver1.Activty.DeliveryUpdate;
+import com.example.senthil.dirver1.Activty.PickupList;
 import com.example.senthil.dirver1.Pojo.DRSListData;
+import com.example.senthil.dirver1.Pojo.PickUpArrayList;
 import com.example.senthil.dirver1.R;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DRSAdapter extends RecyclerView.Adapter<DRSAdapter.MyViewHolder> {
-    private ArrayList<DRSListData> moviesList;
+public class PickupAdapter extends RecyclerView.Adapter<PickupAdapter.MyViewHolder> {
+    private ArrayList<PickUpArrayList> moviesList;
     Context mContext;
-    public DRSAdapter(ArrayList<DRSListData> delievery_data, DRSList drsList) {
+    public PickupAdapter(ArrayList<PickUpArrayList> delievery_data, PickupList drsList) {
    this.moviesList=delievery_data;
    mContext=drsList;
 
@@ -40,8 +39,8 @@ public class DRSAdapter extends RecyclerView.Adapter<DRSAdapter.MyViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DRSAdapter.MyViewHolder holder, int position) {
-        final DRSListData movie = moviesList.get(position);
+    public void onBindViewHolder(@NonNull PickupAdapter.MyViewHolder holder, int position) {
+        PickUpArrayList movie = moviesList.get(position);
         holder.trackId.setText("Track ID :"+ movie.getTrack_id());
         holder.deliveryAddress.setText("Delivery Address :"+ movie.getReceiver_address());
         holder.deliveryDateTime.setText("Delivery Date Time :"+movie.getDate()+"/"+movie.getTime());
@@ -50,9 +49,6 @@ public class DRSAdapter extends RecyclerView.Adapter<DRSAdapter.MyViewHolder> {
         holder.forword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(mContext, DeliveryUpdate.class);
-                intent.putExtra("Data", (Serializable) movie);
-                mContext.startActivity(intent);
 
             }
         });

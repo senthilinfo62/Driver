@@ -2,6 +2,7 @@ package com.example.senthil.dirver1;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -17,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -70,6 +72,16 @@ public class EditProfile extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View hView =  navigationView.getHeaderView(0);
+        SharedPreferences pref;
+        pref = getSharedPreferences("Hyper", MODE_PRIVATE);
+
+        TextView nav_user = hView.findViewById(R.id.username);
+        nav_user.setText(pref.getString("UserName",""));
+        TextView nav_email = hView.findViewById(R.id.email);
+        nav_email.setText(pref.getString("Username",""));
+        final ImageView imageView = hView.findViewById(R.id.imageView);
+
         editUserName.setText( getIntent().getStringExtra("name"));
         editEmail.setText( getIntent().getStringExtra("email"));
         editMobileNo.setText( getIntent().getStringExtra("mobile"));
@@ -145,7 +157,14 @@ public class EditProfile extends AppCompatActivity
             Intent pickHistory=new Intent(EditProfile.this,PickupHistory.class);
             startActivity(pickHistory);
         }else if (id == R.id.nav_logout) {
-
+            SharedPreferences pref = getSharedPreferences("Hyper", MODE_PRIVATE);
+            SharedPreferences.Editor et = pref.edit();
+            et.remove("Username");
+            et.remove("Password");
+            et.commit();
+            Intent intent = new Intent(getApplicationContext(), Login.class);
+            startActivity(intent);
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

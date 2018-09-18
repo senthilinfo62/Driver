@@ -2,6 +2,7 @@ package com.example.senthil.dirver1;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Parcelable;
 import android.support.annotation.RequiresApi;
@@ -40,7 +41,7 @@ public class Login extends AppCompatActivity {
      @BindView(R.id.email_sign_in_button) Button login;
      @BindView(R.id.forgotPassword) TextView forgotPassword;
      @BindView(R.id.Register) TextView Register1;
-
+    SharedPreferences pref;
     APIInterface apiInterface;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,7 @@ public class Login extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ButterKnife.bind(this);
-
+        pref = getSharedPreferences("Hyper", MODE_PRIVATE);
     }
 
     public void getRegister(View view) {
@@ -111,6 +112,13 @@ public class Login extends AppCompatActivity {
                    if (response.body().getStatus()==true) {
                         AppConstants.userName=userName;
                         AppConstants.passWord=password;
+                       final SharedPreferences.Editor et = pref.edit();
+                       et.putString("Username",userName);
+                       et.putString("Password", password);
+                       et.putString("UserName",response.body().getUser_dataObject().getName());
+                       et.putString("userImage",response.body().getUser_dataObject().getProfile_image());
+
+                       et.commit();
                         Intent i = new Intent(Login.this, Profile.class);
                         startActivity(i);
                         finish();

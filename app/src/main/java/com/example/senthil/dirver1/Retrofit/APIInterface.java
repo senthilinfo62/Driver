@@ -2,6 +2,7 @@ package com.example.senthil.dirver1.Retrofit;
 
 import com.example.senthil.dirver1.Pojo.DRSListPOjo;
 import com.example.senthil.dirver1.Pojo.ForgetPojo;
+import com.example.senthil.dirver1.Pojo.PickupPojo;
 import com.example.senthil.dirver1.Pojo.RegisterationPojo;
 import com.example.senthil.dirver1.Pojo.RrgPojo;
 
@@ -36,4 +37,10 @@ public interface APIInterface {
 
     @POST("register_courier")
     Call<RegisterationPojo> RegisterPost1(@Body String json);
+    @FormUrlEncoded
+    @POST("get_pickup_list")
+    Call<PickupPojo> PickupList(@Field("language") String lanuage, @Field("device_type") String divicetype);
+    @FormUrlEncoded
+    @POST("update_shipment_status")
+    Call<ForgetPojo> updateDeliveryStatus(@Field("track_id") String trackId,@Field("shipment_status") String delDetails);
 }
