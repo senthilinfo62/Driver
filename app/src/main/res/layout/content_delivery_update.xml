@@ -8,39 +8,171 @@
     tools:context=".Activty.DeliveryUpdate"
     tools:showIn="@layout/activity_delivery_update">
 
-    <LinearLayout
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:padding="5dp">
+        tools:context="com.journaldev.featuresoftextinputlayout.MainActivity">
 
-        <android.support.design.widget.TextInputLayout
+        <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/dvTrackID"
-            android:padding="5dp">
-            <EditText
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/fab_margin">
+
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/trackID"
-                android:background="@drawable/edittextoutline"/>
-        </android.support.design.widget.TextInputLayout>
+                android:hint="@string/dvTrackID"
+                android:padding="5dp">
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/trackID"
+                    android:background="@drawable/edittextoutline"/>
+            </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/dvTrackID"
-            android:padding="5dp">
-            <Spinner
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/shipementDetails"/>
-        </android.support.design.widget.TextInputLayout>
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:onClick="GetDerlieryUpdate"
-            android:text="@string/title_activity_delivery_update"/>
-    </LinearLayout>
+                android:hint="@string/dvdateTime"
+                android:padding="5dp">
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dvdateTime"
+                    android:background="@drawable/edittextoutline"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/dvPaymentType"
+                android:padding="5dp">
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dvpaymentMode"
+                    android:background="@drawable/edittextoutline"/>
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/dvaccountNo"
+                android:padding="5dp">
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dvaccountNo"
+                    android:background="@drawable/edittextoutline"/>
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/dvSenderName"
+                android:padding="5dp">
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dvsenderName"
+                    android:background="@drawable/edittextoutline"/>
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/dvSenderAddress"
+                android:padding="5dp">
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dvsenderAddress"
+                    android:background="@drawable/edittextoutline"/>
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/dvsenderContactDetails"
+                android:padding="5dp">
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dvsenderContactDetails"
+                    android:background="@drawable/edittextoutline"/>
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/dvReciverName"
+                android:padding="5dp">
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dvreciverName"
+                    android:background="@drawable/edittextoutline"/>
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/dvReciveerAddress"
+                android:padding="5dp">
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dvreciverAddress"
+                    android:background="@drawable/edittextoutline"/>
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/dvReciverContactDetails"
+                android:padding="5dp">
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dvreciverContactDetails"
+                    android:background="@drawable/edittextoutline"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/dvParcaleInfo"
+                android:padding="5dp">
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dvparcelInfo"
+                    android:background="@drawable/edittextoutline"/>
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/dvChargesInfo"
+                android:padding="5dp">
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dvchargesInfo"
+                    android:background="@drawable/edittextoutline"/>
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/shipment_status"
+                android:padding="5dp">
+                <Spinner
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/shipementDetails"/>
+            </android.support.design.widget.TextInputLayout>
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:onClick="GetDerlieryUpdate"
+                android:text="@string/title_activity_delivery_update"/>
+        </LinearLayout>
+    </ScrollView>
+
 
 </RelativeLayout>

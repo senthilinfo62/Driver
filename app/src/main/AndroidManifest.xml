@@ -87,6 +87,10 @@
         <activity
             android:name=".Activty.DeliveryUpdate"
             android:label="@string/title_activity_delivery_update"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Activty.PickupUpdate"
+            android:label="@string/title_activity_pickup_update"
             android:theme="@style/AppTheme"></activity>
     </application>
 

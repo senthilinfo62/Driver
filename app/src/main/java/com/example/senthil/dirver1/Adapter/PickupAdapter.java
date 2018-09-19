@@ -1,6 +1,7 @@
 package com.example.senthil.dirver1.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,11 +11,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.senthil.dirver1.Activty.DRSList;
+import com.example.senthil.dirver1.Activty.DeliveryUpdate;
 import com.example.senthil.dirver1.Activty.PickupList;
+import com.example.senthil.dirver1.Activty.PickupUpdate;
 import com.example.senthil.dirver1.Pojo.DRSListData;
 import com.example.senthil.dirver1.Pojo.PickUpArrayList;
 import com.example.senthil.dirver1.R;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -40,7 +44,7 @@ public class PickupAdapter extends RecyclerView.Adapter<PickupAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(@NonNull PickupAdapter.MyViewHolder holder, int position) {
-        PickUpArrayList movie = moviesList.get(position);
+        final PickUpArrayList movie = moviesList.get(position);
         holder.trackId.setText("Track ID :"+ movie.getTrack_id());
         holder.deliveryAddress.setText("Delivery Address :"+ movie.getReceiver_address());
         holder.deliveryDateTime.setText("Delivery Date Time :"+movie.getDate()+"/"+movie.getTime());
@@ -49,7 +53,9 @@ public class PickupAdapter extends RecyclerView.Adapter<PickupAdapter.MyViewHold
         holder.forword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent=new Intent(mContext, PickupUpdate.class);
+                intent.putExtra("Data", (Serializable) movie);
+                mContext.startActivity(intent);
             }
         });
 

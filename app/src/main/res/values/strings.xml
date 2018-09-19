@@ -63,15 +63,30 @@
 
 
     <string-array name="DeliveryStatus">
-    <item>-Select-</item>
-    <item>PickUp</item>
-    <item>intransit</item>
-    <item>arrived to designation</item>
-    <item>out For Delievery</item>
-    <item>delievery</item>
-  
+        <item>-Select-</item>
+        <item>PickUp</item>
+        <item>intransit</item>
+        <item>arrived to designation</item>
+        <item>out For Delievery</item>
+        <item>delievery</item>
+
     </string-array>
 
     <string name="dvTrackID">Track ID</string>
+    <string name="dvdateTime">Date Time</string>
+    <string name="dvPaymentType">Payment Mode</string>
+    <string name="dvaccountNo">Account No</string>
+    <string name="dvSenderName">Sender Name</string>
+    <string name="dvSenderAddress">Sender Address</string>
+    <string name="dvsenderContactDetails">Sender Contact Details</string>
+    <string name="dvReciverName">Reciver Name</string>
+    <string name="dvReciveerAddress">Reciver Address</string>
+    <string name="dvReciverContactDetails">Reciver Contact Details</string>
+
+    <string name="dvParcaleInfo">Parcel Info</string>
+    <string name="dvChargesInfo">Charges Info</string>
+
+
     <string name="shipment_status">Shipment Status</string>
+    <string name="title_activity_pickup_update">Pickup Update</string>
 </resources>

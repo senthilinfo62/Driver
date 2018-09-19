@@ -1,6 +1,8 @@
 package com.example.senthil.dirver1.Pojo;
 
-public class PickUpArrayList {
+import java.io.Serializable;
+
+public class PickUpArrayList implements Serializable {
   private String id;
   private String track_id;
   private String reference;
